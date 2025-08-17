@@ -8,29 +8,31 @@ let tentativas = 1;
 function verificarChute() {
     let chute = parseInt(document.querySelector('input').value);
 
+    // Primeiro verifica se o chute está fora do limite
     if (chute < limiteMinimo || chute > limiteMaximo) {
         exibirTextoNaTela('p', `Você só pode colocar números entre ${limiteMinimo} e ${limiteMaximo}`);
-        tentativa--;
-        return limparCampo();
-    } 
+        limparCampo();
+        return; // impede que o resto do código execute
+    }
+
+    // Chute válido → conta tentativa
+    tentativas++;
 
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', "Acertou!");
         let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
-        let mensagemTentativas = (`Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`);
+        let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
         exibirTextoNaTela('p', mensagemTentativas);
         ativarBotao();
+    } else if (chute < numeroSecreto) {
+        exibirTextoNaTela('p', 'O número secreto é maior');
     } else {
-         if (chute < numeroSecreto) {
-            exibirTextoNaTela('p', 'O número secreto é maior');
-        }
-        if (chute > numeroSecreto) {
-            exibirTextoNaTela('p', 'O número secreto é menor');
-        }
-        tentativas++;
+        exibirTextoNaTela('p', 'O número secreto é menor');
     }
-limparCampo()
+
+    limparCampo();
 }
+
 
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
