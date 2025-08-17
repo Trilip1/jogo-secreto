@@ -8,6 +8,15 @@ let tentativasRestantes = limiteTentativas - tentativas;
 let quantidadeMaximaDeNumeros = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 
+
+let botao = document.querySelector('input');
+botao.addEventListener('keydown', function(event) {
+    if (event.key == 'Enter') {
+        document.getElementById('chutar').click();
+    }
+}) 
+
+
 function exibirMensagemInicial() {
     exibirTextoNaTela('h1', 'Jogo do Número Secreto');
     exibirTextoNaTela('p', 'Escolha um número entre 1 e 10');
