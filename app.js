@@ -8,14 +8,12 @@ let tentativasRestantes = limiteTentativas - tentativas;
 let quantidadeMaximaDeNumeros = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 
-
 let botao = document.querySelector('input');
 botao.addEventListener('keydown', function(event) {
     if (event.key == 'Enter') {
         document.getElementById('chutar').click();
     }
 }) 
-
 
 function exibirMensagemInicial() {
     exibirTextoNaTela('h1', 'Jogo do Número Secreto');
@@ -33,19 +31,8 @@ function verificarChute() {
     } 
 
     // Chute válido → conta tentativa
-    if (chute >= limiteMinimo && chute <= limiteMaximo) {
-        tentativas++; 
-    }
-
-    if (tentativas >= limiteTentativas) {
-        exibirTextoNaTela('h1', 'Fim de Jogo!');
-        exibirTextoNaTela('p', `Você atingiu o número máximo de tentativas, o número secreto era ${numeroSecreto}`);
-        desativarBotao2();
-        ativarBotao();
-        limparCampo(); 
-        return;
-    }
-
+        tentativas++;
+        
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', "Acertou!");
         let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
@@ -53,12 +40,23 @@ function verificarChute() {
         exibirTextoNaTela('p', mensagemTentativas);
         desativarBotao2();
         ativarBotao();
+        limparCampo();
+        return;
     } else if (chute < numeroSecreto) {
         exibirTextoNaTela('p', 'O número secreto é maior');
     } else {
         exibirTextoNaTela('p', 'O número secreto é menor');
-    }
+    }   
 
+    if (tentativas  >= limiteTentativas) {
+        exibirTextoNaTela('h1', 'Fim de Jogo!');
+        exibirTextoNaTela('p', `Você atingiu o número máximo de tentativas, o número secreto era ${numeroSecreto}`);
+        desativarBotao2();
+        ativarBotao();
+        limparCampo(); 
+        return;
+    }
+    
     limparCampo();
 }
 
@@ -77,7 +75,6 @@ function gerarNumeroAleatorio() {
         return gerarNumeroAleatorio();
     } else {
         listaDeNumerosGerados.push(numeroEscolhido);
-        console.log(listaDeNumerosGerados);
         return numeroEscolhido;
     }
 }
