@@ -5,13 +5,12 @@ let limiteMaximo = 10;
 let tentativas = 0;
 let limiteTentativas = 5; 
 let tentativasRestantes = limiteTentativas - tentativas;
-let quantidadeMaximaDeNumeros = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 
 let botao = document.querySelector('input');
 botao.addEventListener('keydown', function(event) {
     if (event.key == 'Enter') {
-        document.getElementById('chutar').click();
+        verificarChute();
     }
 }) 
 
@@ -66,9 +65,9 @@ function exibirTextoNaTela(tag, texto) {
 }
 
 function gerarNumeroAleatorio() {
-    let numeroEscolhido = parseInt(Math.random() * quantidadeMaximaDeNumeros + 1);
+    let numeroEscolhido = parseInt(Math.random() * limiteMaximo + 1);
     let tamanhoDaLista = listaDeNumerosGerados.length;
-    if (tamanhoDaLista == quantidadeMaximaDeNumeros) {
+    if (tamanhoDaLista == limiteMaximo) {
         listaDeNumerosGerados = [];
     }
     if (listaDeNumerosGerados.includes(numeroEscolhido)) {
@@ -84,15 +83,19 @@ function limparCampo() {
     chute.value = '';
 }
 
-function ativarBotao() {
+function desativarBotaoReiniciar() {
+    document.getElementById('reiniciar').setAttribute('disabled', true);
+}
+
+function ativarBotaoReiniciar() {
     document.getElementById('reiniciar').removeAttribute('disabled');
 }
 
-function ativarBotao2() {
+function ativarBotaoChutar() {
     document.getElementById('chutar').removeAttribute('disabled');
 }
 
-function desativarBotao2() {
+function desativarBotaoChutar() {
     document.getElementById('chutar').setAttribute('disabled', true);
 }
 
@@ -101,7 +104,7 @@ function reiniciarJogo(){
     limparCampo();
     tentativas = 0;
     exibirMensagemInicial();
-    document.getElementById('reiniciar').setAttribute('disabled', true);
+    desativarBotaoReiniciar();
     ativarBotao2();
 }
 
