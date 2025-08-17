@@ -6,28 +6,30 @@ let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
 function verificarChute() {
-    let chute = document.querySelector('input').value;
+    let chute = parseInt(document.querySelector('input').value);
+
+    if (chute < limiteMinimo || chute > limiteMaximo) {
+        exibirTextoNaTela('p', `Você só pode colocar números entre ${limiteMinimo} e ${limiteMaximo}`);
+        tentativa--;
+        return limparCampo();
+    } 
+
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', "Acertou!");
         let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
-        let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
+        let mensagemTentativas = (`Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`);
         exibirTextoNaTela('p', mensagemTentativas);
         ativarBotao();
     } else {
-        if (chute < numeroSecreto) {
+         if (chute < numeroSecreto) {
             exibirTextoNaTela('p', 'O número secreto é maior');
         }
         if (chute > numeroSecreto) {
             exibirTextoNaTela('p', 'O número secreto é menor');
         }
-        if (chute < limiteMinimo || chute > limiteMaximo) {
-            exibirTextoNaTela('p', 'Tem que ser entre 1 ou 10');
-            tentativas--;
-        }
         tentativas++;
-        limparCampo()
-    }      
-    console.log(numeroSecreto);
+    }
+limparCampo()
 }
 
 function exibirTextoNaTela(tag, texto) {
