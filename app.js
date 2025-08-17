@@ -1,4 +1,6 @@
 let listaDeNumerosGerados = [];
+let limiteMinimo = 0
+let limiteMáximo = 10
 let quantidadeMaximaDeNumeros = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
@@ -18,7 +20,7 @@ function verificarChute() {
         if (chute > numeroSecreto) {
             exibirTextoNaTela('p', 'O número secreto é menor');
         }
-        if (chute < 0 || chute > 10) {
+        if (chute < limiteMinimo || chute > limiteMaximo) {
             exibirTextoNaTela('p', 'Tem que ser entre 1 ou 10');
             tentativas--;
         }
