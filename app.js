@@ -18,6 +18,10 @@ function verificarChute() {
         if (chute > numeroSecreto) {
             exibirTextoNaTela('p', 'O número secreto é menor');
         }
+        if (chute < 0 || chute > 10) {
+            exibirTextoNaTela('p', 'Tem que ser entre 1 ou 10');
+            tentativas--;
+        }
         tentativas++;
         limparCampo()
     }      
