@@ -91,12 +91,12 @@ function ativarBotaoReiniciar() {
     document.getElementById('reiniciar').removeAttribute('disabled');
 }
 
-function ativarBotaoChutar() {
-    document.getElementById('chutar').removeAttribute('disabled');
-}
-
 function desativarBotaoChutar() {
     document.getElementById('chutar').setAttribute('disabled', true);
+}
+
+function ativarBotaoChutar() {
+    document.getElementById('chutar').removeAttribute('disabled');
 }
 
 function reiniciarJogo(){
