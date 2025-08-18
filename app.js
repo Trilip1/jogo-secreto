@@ -42,6 +42,7 @@ function verificarChute() {
         exibirTextoNaTela('p', mensagemTentativas);
         disableBotao('chutar', true);
         disableBotao('reiniciar', false);
+        botao.removeEventListener('keydown', cimento, false);
         limparCampo();
         return;
     } else if (chute < numeroSecreto) {
