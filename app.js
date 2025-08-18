@@ -103,6 +103,7 @@ function reiniciarJogo(){
     exibirMensagemInicial();
     disableBotao('reiniciar', true);
     disableBotao('chutar', false);
+    botao.addEventListener('keydown', cimento, true);
 }
 
 exibirMensagemInicial();
