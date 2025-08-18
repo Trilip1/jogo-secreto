@@ -37,8 +37,8 @@ function verificarChute() {
         let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
         let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
         exibirTextoNaTela('p', mensagemTentativas);
-        desativarBotao2();
-        ativarBotao();
+        disableBotao('chutar', true);
+        disableBotao('reiniciar', false);
         limparCampo();
         return;
     } else if (chute < numeroSecreto) {
@@ -50,8 +50,9 @@ function verificarChute() {
     if (tentativas  >= limiteTentativas) {
         exibirTextoNaTela('h1', 'Fim de Jogo!');
         exibirTextoNaTela('p', `Você atingiu o número máximo de tentativas, o número secreto era ${numeroSecreto}`);
-        desativarBotao2();
-        ativarBotao();
+        disableBotao('chutar', true);
+        disableBotao('reiniciar', false);
+        botao.removeEventListener();
         limparCampo(); 
         return;
     }
@@ -83,20 +84,12 @@ function limparCampo() {
     chute.value = '';
 }
 
-function desativarBotaoReiniciar() {
-    document.getElementById('reiniciar').setAttribute('disabled', true);
-}
-
-function ativarBotaoReiniciar() {
-    document.getElementById('reiniciar').removeAttribute('disabled');
-}
-
-function desativarBotaoChutar() {
-    document.getElementById('chutar').setAttribute('disabled', true);
-}
-
-function ativarBotaoChutar() {
-    document.getElementById('chutar').removeAttribute('disabled');
+function disableBotao(idBotao, ativar) {
+    if (ativar == true) {
+        document.getElementById(idBotao).setAttribute('disabled', true);
+    } else {
+        document.getElementById(idBotao).removeAttribute('disabled');
+    }
 }
 
 function reiniciarJogo(){
@@ -104,8 +97,8 @@ function reiniciarJogo(){
     limparCampo();
     tentativas = 0;
     exibirMensagemInicial();
-    desativarBotaoReiniciar();
-    ativarBotao2();
+    disableBotao('reiniciar', true);
+    disableBotao('chutar', false);
 }
 
 exibirMensagemInicial();
