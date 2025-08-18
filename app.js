@@ -8,11 +8,14 @@ let tentativasRestantes = limiteTentativas - tentativas;
 let numeroSecreto = gerarNumeroAleatorio();
 
 let botao = document.querySelector('input');
-botao.addEventListener('keydown', function(event) {
+
+let cimento = function (event) {
     if (event.key == 'Enter') {
         verificarChute();
     }
-}) 
+}
+
+botao.addEventListener('keydown', cimento); 
 
 function exibirMensagemInicial() {
     exibirTextoNaTela('h1', 'Jogo do Número Secreto');
@@ -52,7 +55,7 @@ function verificarChute() {
         exibirTextoNaTela('p', `Você atingiu o número máximo de tentativas, o número secreto era ${numeroSecreto}`);
         disableBotao('chutar', true);
         disableBotao('reiniciar', false);
-        botao.removeEventListener();
+        botao.removeEventListener('keydown', cimento, false);
         limparCampo(); 
         return;
     }
